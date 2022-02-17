@@ -10,23 +10,26 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         }
         .puzzle{
             display: flex;
-            gap: 5px;
+            gap: 1px;
             justify-content: center;
+            flex-wrap: wrap;
+            padding: 10px;
         }
         .hide{
             display: none;
         }
         h3{
-            font-size: 20px;
+            font-size: 17px;
             padding: 8px 0;
         }
         .btn{
             background-color: transparent;
             border: 1px solid gray;
-            padding: 5px 8px;
+            padding: 15px 20px;
             cursor: pointer;
             transition: all ease-in-out 300ms;
         }
@@ -34,29 +37,151 @@
             background-color: green;
             color: white;
         }
+        .title{
+            font-size: 20px;
+            text-align: center;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
+    <h1 class="title">This page was filled by javaScript view page source to see what's actually going on</h1>
+    <h2 class="puzzle">Puzzle</h2>
     <h3 class="puzzle" id="puzzle"></h3>
+    <h2 class="puzzle">With Hints</h2>
+    <h3 class="puzzle" id="start"></h3>
     <h3 class="puzzle hide" id="solution"></h3>
     <div style="display: flex; justify-content: center;">
-        <button class="btn" onclick="show()">Show Solution</button>
+        <button id="button" class="btn" onclick="show()">Show Solution</button>
     </div>
 <script>
-    let string = ["AJCJC", "LZPD-LDYFDZIIPQF" , "ZEWPBYD ICCUPQFB" , "ICBBZFC PQBUDJKUYD YD ICQUYD"]
-    document.getElementById("puzzle").innerHTML = string.join(" | ")
-    const html = string.map((e)=>{
-        if(e ==="AJCJC")e = "QUEUE"
-        if(e ==="LZPD-LDYFDZIIPQF")e = "PAIR-PROGRAMMING"
-        if(e ==="ZEWPBYD ICCUPQFB")e = "ADVISOR MEETINGS"
-        if(e ==="ICBBZFC PQBUDJKUYD YD ICQUYD")e = "MESSAGE INSTRUCTOR OR MENTOR"
-        return `<h3>${e}</h3>`
-    }).join(" <h3>|</h3> ")
+    let string = "AJCJC | LZPD-LDYFDZIIPQF | ZEWPBYD ICCUPQFB | ICBBZFC PQBUDJKUYD YD ICQUYD"
+    let array = []
+    let open = false
+    for (let i = 0; i < string.length; i++) {
+        array.push(string.charAt(i))
+    }
+    document.getElementById("puzzle").innerHTML = string
+    
+    //just for demo how i started the puzzle with given hints
+    const html2 = array.map((e)=>{
+       switch (e) {
+           case "A":
+               e = "Q"
+               return `<h3>${e}</h3>`
+           case "C":
+               e = "E"
+               return `<h3>${e}</h3>`
+           case "I":
+               e = "M"
+               return `<h3>${e}</h3>`
+           case "L":
+               e = "P"
+               return `<h3>${e}</h3>`
+           case "Q":
+               e = "N"
+               return `<h3>${e}</h3>`
+           case "Y":
+               e = "O"
+               return `<h3>${e}</h3>`
+           case "|":
+               e = "|"
+               return `<h3 style="padding-left:2px;padding-right:2px">${e}</h3>`
+           case "-":
+               e = "-"
+               return `<h3 style="padding-left:3px;padding-right:3px;">${e}</h3>`
+           case " ":
+                e = " "
+               return `<h3 style="padding-left:3px;padding-right:3px;">${e}</h3>`
+           default:
+                e = "-"
+               return `<h3>${e}</h3>`
+               break;
+       }
+        
+    }).join("")
+    
+    //then here I just started adding letters to switch as I find them 
+    const html = array.map((e)=>{
+       switch (e) {
+           case "A":
+               e = "Q"
+               return `<h3>${e}</h3>`
+           case "C":
+               e = "E"
+               return `<h3>${e}</h3>`
+           case "I":
+               e = "M"
+               return `<h3>${e}</h3>`
+           case "L":
+               e = "P"
+               return `<h3>${e}</h3>`
+           case "Q":
+               e = "N"
+               return `<h3>${e}</h3>`
+           case "Y":
+               e = "O"
+               return `<h3>${e}</h3>`
+           case "J":
+               e = "U"
+               return `<h3>${e}</h3>`
+           case "|":
+               e = "|"
+               return `<h3 style="padding-left:2px;padding-right:2px">${e}</h3>`
+           case "Z":
+               e = "A"
+               return `<h3>${e}</h3>`
+           case "P":
+               e = "I"
+               return `<h3>${e}</h3>`
+           case "D":
+               e = "R"
+               return `<h3>${e}</h3>`
+           case "-":
+               e = "-"
+               return `<h3>${e}</h3>`
+           case "F":
+               e = "G"
+               return `<h3>${e}</h3>`
+           case "U":
+               e = "T"
+               return `<h3>${e}</h3>`
+           case "E":
+               e = "D"
+               return `<h3>${e}</h3>`
+           case "W":
+               e = "V"
+               return `<h3>${e}</h3>`
+           case "B":
+               e = "S"
+               return `<h3>${e}</h3>`
+           case " ":
+                e = " "
+               return `<h3 style="padding-left:3px;padding-right:3px;">${e}</h3>`
+           case "K":
+                e = "C"
+               return `<h3>${e}</h3>`
+           default:
+                e = "-"
+               return `<h3 >${e}</h3>`
+               break;
+       }
+        
+    }).join("")
 
+    //inserting the solution array returned from map to the solution element 
     document.getElementById("solution").innerHTML = html
-
+    //inserting the demo to the start element
+    document.getElementById("start").innerHTML = html2
+    // function to run when the button pressed 
     const show = ()=>{
+        if(open){
+            open = false
+        }else{
+            open = true
+        }
         document.getElementById("solution").classList.toggle('hide')
+        document.getElementById("button").innerHTML = open ? "Hide Solution" : "Show Solution"
     }
 </script>
 </body>

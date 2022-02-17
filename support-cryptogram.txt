@@ -1,2 +1,3 @@
-To make it more fun you can see it here since we're all about web dev right now ;)
+To make it more fun you can see it in the link below, 
+since we're all about web dev right now, had to make javaScript write it for me inseatd of using a paper ;)
 https://zeejaydev.github.io/support-cryptogram/
